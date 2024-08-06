@@ -27,5 +27,5 @@ public class Main {
         // 13 задание //
         Lesson2.arraySquare();
         // 14 задание //
-        }
     }
+}
