@@ -106,7 +106,6 @@ public class Lesson2 {
     }
 
     public static void arrayOneDimensional() {
-
     }
 }
 
