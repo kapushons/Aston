@@ -104,6 +104,7 @@ public class Lesson2 {
         for (int i = 0; i < 7; i++)
             System.out.println(Arrays.toString(arr[i]));
     }
+
     public static int[] arrayLen(int len, int initialValue) {
         int[] arr = new int[len];
         for (int i = 0; i < len; i++) {
