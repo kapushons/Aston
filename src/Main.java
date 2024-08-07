@@ -27,5 +27,9 @@ public class Main {
         // 13 задание //
         Lesson2.arraySquare();
         // 14 задание //
+        int[] arr = Lesson2.arrayLen(5,4);
+        for (int i = 0; i< arr.length; i++) {
+            System.out.println(arr[i] + "");
+        }
     }
 }
