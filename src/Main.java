@@ -1,15 +1,35 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+        // 1 задание //
+        Lesson2.printThreeWords();
+        // 2 задание //
+        Lesson2.checkSumSign();
+        // 3 задание //
+        Lesson2.printColor();
+        // 4 задание //
+        Lesson2.compareNumbers();
+        // 5 задание //
+        Lesson2.numberLine(5, 7);
+        // 6 задание //
+        Lesson2.numberValue();
+        // 7 задание //
+        Lesson2.returnNumber(-5);
+        // 8 задание //
+        Lesson2.stringAndNumber("Привет", 2);
+        // 9 задание //
+        Lesson2.years(2023);
+        // 10 задание//
+        Lesson2.array();
+        // 11 задание //
+        Lesson2.arrayHundred();
+        // 12 задание //
+        Lesson2.arrayMultiplication();
+        // 13 задание //
+        Lesson2.arraySquare();
+        // 14 задание //
+        int[] arr = Lesson2.arrayLen(5, 4);
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i] + "");
         }
     }
 }
