@@ -9,15 +9,15 @@ public class Main {
         // 4 задание //
         Lesson2.compareNumbers();
         // 5 задание //
-        Lesson2.numberLine();
+        Lesson2.numberLine(5, 7);
         // 6 задание //
         Lesson2.numberValue();
         // 7 задание //
-        Lesson2.returnNumber();
+        Lesson2.returnNumber(-5);
         // 8 задание //
-        Lesson2.stringAndNumber();
+        Lesson2.stringAndNumber("Привет", 2);
         // 9 задание //
-        Lesson2.years();
+        Lesson2.years(2023);
         // 10 задание//
         Lesson2.array();
         // 11 задание //

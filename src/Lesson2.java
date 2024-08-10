@@ -20,10 +20,15 @@ public class Lesson2 {
     }
 
     public static void printColor() {
-        int value = -101;
-        if (value <= 0) System.out.println("Красный");
-        else if (value >= 101) System.out.println("Зелёный");
-        else System.out.println("Жёлтый");
+        int value = 101;
+
+        if (value <= 0) {
+            System.out.println("Красный");
+        } else if (value > 0 && value <= 100) {
+            System.out.println("Жёлтый");
+        } else {
+            System.out.println("Зелёный");
+        }
     }
 
     public static void compareNumbers() {
@@ -33,12 +38,14 @@ public class Lesson2 {
         else System.out.println("a<b");
     }
 
-    public static void numberLine() {
-        int a = 12;
-        int b = 10;
-        int c = a + b;
-        if (c > 9 && c < 21) System.out.println("True");
-        else System.out.println("False");
+    public static boolean isSumInRange(int a, int b) {
+        int sum = a + b;
+
+        return sum >= 10 && sum <= 20;
+    }
+
+    public static void numberLine(int a, int b) {
+        System.out.println(isSumInRange(a, b));
     }
 
     public static void numberValue() {
@@ -47,22 +54,36 @@ public class Lesson2 {
         else System.out.println("Число положительное");
     }
 
-    public static void returnNumber() {
-        int a = 0;
-        if (a <= -1) System.out.println("True");
-        else System.out.println("False");
-    }
-
-    public static void stringAndNumber() {
-        for (int i = 0; i < 2; i++) {
-            System.out.println("Я люблю Астон");
+    public static boolean isIntegerNumber(int a) {
+        if (a < 0) {
+            return true;
+        } else {
+            return false;
         }
     }
 
-    public static void years() {
-        int a = 2077;
-        if (!(a % 4 == 0) || ((a % 100 == 0) && !(a % 400 == 0))) System.out.println(a + " - Не високосный - False");
-        else System.out.println(a + " - Високосный - True");
+    public static void returnNumber(int a) {
+        System.out.println(isIntegerNumber(a));
+    }
+
+    public static void stringAndNumber(String text, int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            System.out.println(text);
+        }
+    }
+
+    public static boolean isLeapYear(int year) {
+        if (((year % 400) == 0) || (year % 4 == 0)) {
+            return true;
+        } else if (year % 100 == 0) {
+            return false;
+        } else {
+            return false;
+        }
+    }
+
+    public static void years(int year) {
+        System.out.println(isLeapYear(year));
     }
 
     public static void array() {
