@@ -23,7 +23,7 @@ public class Park {
         }
     }
 
-    public static void main(String[] args) {
+    public static void getInfoPark() {
         Park park = new Park("Астон");
 
         Attraction attractionTrampoline = park.new Attraction("Батут", "09:00 - 13:00", "700");

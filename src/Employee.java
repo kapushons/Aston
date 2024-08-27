@@ -24,7 +24,7 @@ public class Employee {
                 "Возраст: " + age);
     }
 
-    public static void main(String[] args) {
+    public static void getEmployee() {
         Employee employee = new Employee(
                 "Сорокин Сергей Владимирович",
                 "Стажер",
