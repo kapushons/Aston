@@ -18,3 +18,4 @@ public class FactorialTest {
         assertThrows(IllegalArgumentException.class, () -> Factorial.calculate(-1));
     }
 }
+//Пишу для коммита
