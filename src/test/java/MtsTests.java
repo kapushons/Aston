@@ -1,115 +1,71 @@
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class MtsTests {
-    private static WebDriver driver;
-    private static WebDriverWait wait;
-    private static boolean cookieAccepted = false; // Переменная для отслеживания нажатия кнопки
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-    public static void main(String[] args) {
-        driver = new ChromeDriver();
-        driver.get("https://www.mts.by/");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(1));
+public class MtsTests extends BaseTest {
 
-        // Пробуем принять cookies в начале теста
-        acceptCookiesIfPresent();
-
-        try {
-            // Ожидание и проверка названия блока
-            WebElement blockTitle = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//h2[contains(text(), 'Онлайн пополнение ')]")));
-            System.out.println("Название блока найдено: " + blockTitle.getText());
-        } catch (Exception e) {
-            System.out.println("Название блока не найдено: " + e.getMessage());
-        }
-
-        // Повторное обращение к функции перед каждым действием, где это может понадобиться
-        acceptCookiesIfPresent();
-
-        try {
-            // Ожидание и проверка наличия логотипов платежных систем
-            WebElement logos = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.xpath("//div[@class='pay__partners']")));
-            System.out.println("Логотипы платежных систем найдены");
-        } catch (Exception e) {
-            System.out.println("Логотипы платежных систем не найдены: " + e.getMessage());
-        }
-
-        acceptCookiesIfPresent();
-
-        try {
-            // Ожидание работы ссылки "Подробнее о сервисе"
-            WebElement moreInfoLink = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.linkText("Подробнее о сервисе")));
-            moreInfoLink.click();
-            System.out.println("-Нажата кнопка подробнее о сервисе-");
-        } catch (Exception e) {
-            System.out.println("Не удалось кликнуть по ссылке 'Подробнее о сервисе': " + e.getMessage());
-        }
-
-        acceptCookiesIfPresent();
-
-        try {
-            // Возврат по ссылке "Главная"
-            WebElement mainLink = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.linkText("Главная")));
-            mainLink.click();
-            System.out.println("Нажата кнопка -Главная-");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        acceptCookiesIfPresent();
-
-        try {
-            // Ожидание заполнения полей и работы кнопки "Продолжить"
-            WebElement phoneNumberField = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.id("connection-phone")));
-            phoneNumberField.sendKeys("297777777");
-            WebElement summaButton = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                    By.id("connection-sum")));
-            summaButton.sendKeys("100");
-
-            WebElement continueButton = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath("//button[contains(text(), 'Продолжить')]")));
-            continueButton.click();
-        } catch (Exception e) {
-            System.out.println("Ошибка при взаимодействии с полями формы: " + e.getMessage());
-        }
-
-        acceptCookiesIfPresent();
-
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        // Закрытие браузера
-        driver.quit();
+    @Test
+    public void blockTitle() {
+        // Проверка названия блока "Онлайн пополнение без комиссии"
+        WebElement blockTitle = driver.findElement(By.xpath("//h2[contains(text(), 'Онлайн пополнение ')]"));
+        String expectedTitle = "Онлайн пополнение\nбез комиссии";
+        assertEquals(expectedTitle, blockTitle.getText(), "Название блока не соответствует ожидаемому");
     }
 
-    private static void acceptCookiesIfPresent() {
-        if (cookieAccepted) {
-            return; // Если кнопка уже была нажата, выходим из метода
-        }
+    @Test
+    public void paymentSystemVisa() {
+        WebElement visaLogo = driver.findElement(By.xpath("//div[@class='pay__partners']//ul//img[@alt='Visa']"));
+        assertTrue(visaLogo.isDisplayed(), "Логотип платежной системы VISA не найден на странице");
+    }
 
-        try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-            WebElement cookieAcceptButton = wait.until(ExpectedConditions.elementToBeClickable(
-                    By.xpath("//button[contains(text(), 'Принять')]")));
-            cookieAcceptButton.click();
-            cookieAccepted = true; // Устанавливаем, что кнопка была нажата
-            System.out.println("Нажата кнопка подтверждения файлов cookie");
-        } catch (Exception e) {
-            System.out.println("Кнопка подтверждения cookie не найдена.");
-        }
+    @Test
+    public void paymentSystemVerifiedByVisa() {
+        WebElement visaLogo = driver.findElement(By.xpath("//div[@class='pay__partners']//ul//img[@alt='Verified By Visa']"));
+        assertTrue(visaLogo.isDisplayed(), "Логотип платежной системы Verified By Visa не найден на странице");
+    }
+
+    @Test
+    public void paymentSystemMasterCard() {
+        WebElement visaLogo = driver.findElement(By.xpath("//div[@class='pay__partners']//ul//img[@alt='MasterCard']"));
+        assertTrue(visaLogo.isDisplayed(), "Логотип платежной системы MasterCard не найден на странице");
+    }
+
+    @Test
+    public void paymentSystemMasterCardSecureCode() {
+        WebElement visaLogo = driver.findElement(By.xpath("//div[@class='pay__partners']//ul//img[@alt='MasterCard Secure Code']"));
+        assertTrue(visaLogo.isDisplayed(), "Логотип платежной системы MasterCard Secure Code не найден на странице");
+    }
+
+    @Test
+    public void paymentSystemBelkart() {
+        WebElement visaLogo = driver.findElement(By.xpath("//div[@class='pay__partners']//ul//img[@alt='Белкарт']"));
+        assertTrue(visaLogo.isDisplayed(), "Логотип платежной системы Белкарт не найден на странице");
+    }
+
+    @Test
+    public void moreInfoLink() {
+        WebElement serviceLink = driver.findElement(By.xpath("//div[@class='pay__wrapper']//a[@href]"));
+        assertTrue(serviceLink.isDisplayed(), "Ссылка 'Подробнее о сервисе' не найдена на странице");
+        serviceLink.click();
+        String expectedUrl = "https://www.mts.by/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/";
+        assertEquals(expectedUrl, driver.getCurrentUrl(), "Ссылка не ведет на правильную страницу");
+    }
+
+    @Test
+    public void testServiceContinueButton() {
+        WebElement servicesTab = driver.findElement(By.className("select__now"));
+        servicesTab.click();
+        WebElement phoneNumberField = driver.findElement(By.id("connection-phone"));
+        phoneNumberField.sendKeys("297777777");
+        WebElement sumField = driver.findElement(By.id("connection-sum"));
+        sumField.sendKeys("100");
+        WebElement continueButton = driver.findElement(By.cssSelector("#pay-connection button"));
+        continueButton.click();
     }
 }
-
